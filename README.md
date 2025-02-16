@@ -1,3 +1,72 @@
+# Full Next.js + Prisma App
+
+This is a guide for setting up a simple **Next.js** application with **Prisma** for database management. The app includes basic user functionality, such as listing and adding users.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Prisma Setup](#prisma-setup)
+- [Seeding Database](#seeding-database)
+- [API Routes](#api-routes)
+- [UI Implementation](#ui-implementation)
+- [Git Setup](#git-setup)
+- [Running the App](#running-the-app)
+- [Deploying](#deploying)
+
+## Installation
+
+To get started, you'll need to install the following dependencies:
+
+```bash
+npm install next react react-dom @prisma/client @next/font tailwindcss postcss autoprefixer
+```
+
+## 2. Database Setup
+
+Create the database in postgres:
+
+```bash
+psql postgres
+```
+
+```sql
+CREATE DATABASE magicbook;
+CREATE USER magicbook_admin WITH PASSWORD 'magicbook_password';
+ALTER USER magicbook_admin CREATEDB;
+GRANT ALL PRIVILEGES ON DATABASE magicbook TO magicbook_admin;
+```
+
+Run the following command to initialize Prisma:
+
+```bash
+npx prisma init
+echo DATABASE_URL="postgresql://magicbook_admin:magicbook_password@localhost:5432/magicbook?schema=public" > .env
+```
+
+Add this code to prisma/schema.prisma
+```js
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+}
+```
+
+Run migrations
+
+```bash
+npx npx prisma migrate dev --name init
+```
+
 /* Full Next.js + Prisma App */
 
 // 1. Install dependencies:
