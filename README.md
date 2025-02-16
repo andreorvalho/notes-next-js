@@ -161,3 +161,8 @@ touch types/index.ts
   npm run dev
 ```
 // 11. Deploy Frontend on Vercel and Database on Railway/Supabase
+
+To create a secret for logins of the app
+```bash
+node scripts/generateJwtSecret.js
+```
