@@ -148,7 +148,16 @@ export default function Home() {
 }
 ```
 
-// 10. Start Server:
-// npm run dev
+## 4. Add types
 
+```bash
+mkdir -p types
+touch types/index.ts
+```
+
+## 5. Run server
+
+```bash
+  npm run dev
+```
 // 11. Deploy Frontend on Vercel and Database on Railway/Supabase

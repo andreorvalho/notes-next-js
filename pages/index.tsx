@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
+import { User } from "../types";
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    fetch("/api/users")
-      .then((res) => {
-        const a = res.json();
-        console.log(a);
-        return a;
-
-      })
-      .then(setUsers);
+    fetch("/api/users").then((res) => res.json()).then(setUsers);
   }, []);
 
   return (
