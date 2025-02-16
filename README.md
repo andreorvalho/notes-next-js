@@ -19,6 +19,7 @@ To get started, you'll need to install the following dependencies:
 
 ```bash
 npm install next react react-dom @prisma/client @next/font tailwindcss postcss autoprefixer
+npm i -D ts-node typescript @types/node
 ```
 
 ## 2. Database Setup
@@ -66,6 +67,34 @@ Run migrations
 ```bash
 npx npx prisma migrate dev --name init
 ```
+
+Create a seeds file
+
+```bash
+touch prisma/seed.ts
+```
+
+Add this code to it.
+
+```js
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+async function main() {
+  await prisma.user.createMany({
+    data: [
+      { name: "John Doe", email: "john@example.com" },
+      { name: "Jane Doe", email: "jane@example.com" }
+    ]
+  });
+}
+```
+
+Run the seeds
+
+```bash
+npx prisma db seed
+```
+
 
 /* Full Next.js + Prisma App */
 
