@@ -20,14 +20,12 @@ export default function Login() {
 
     const data = await res.json();
 
-    console.log(data);
-
     if (res.ok) {
       // Store the JWT token in localStorage or cookies
       localStorage.setItem("token", data.token);
 
       // Redirect to the dashboard or home page
-      router.push("/dashboard");
+      router.push("/");
     } else {
       setError(data.error);
     }
